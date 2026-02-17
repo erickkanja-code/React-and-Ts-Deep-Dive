@@ -1,6 +1,15 @@
 import React, { useState } from 'react'
 import './styles.css'
-const InputField: React.FC = () => {
+
+interface Props{
+  todo: string,
+  setTodo: React.Dispatch<React.SetStateAction<string>>
+}
+
+
+
+
+const InputField = ({ todo, setTodo }: Props) => {
 
 
 
