@@ -6,7 +6,7 @@ interface Props{
 }
 
 
-const TodoList = ({todos}: Props) => {
+const TodoList: React.FC<Props> = ({todos}) => {
   return (
     <ul>
       {todos.map((t) => (
