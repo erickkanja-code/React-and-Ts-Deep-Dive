@@ -10,9 +10,11 @@ const App: React.FC = () => {
 
   const handleAdd = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log(e.target)
-    const newTodos: Todo[] = [...todos, {id: todos.length + 1, todo: todo, isDone: false }]
-    setTodos(newTodos)
+    const newTodos: Todo[] = [...todos, {id: Date.now(), todo: todo, isDone: false }]
+    if (todo) {
+      setTodos(newTodos)
+    }
+    setTodo('')
   }
 
   return (
@@ -23,9 +25,9 @@ const App: React.FC = () => {
         setTodo={setTodo}
         handleAdd={handleAdd}
       />
-      {todos.map((item) => (
+      {todos.map((t) => (
         <ul>
-          <li>{item.todo}</li>
+          <li>{t.todo}</li>
         </ul>
       ))}
     </div>
