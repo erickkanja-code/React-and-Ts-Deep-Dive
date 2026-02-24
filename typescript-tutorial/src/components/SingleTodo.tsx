@@ -3,6 +3,7 @@ import { Todo } from '../model'
 import { AiFillEdit, AiFillDelete } from "react-icons/ai"
 import { MdDone } from "react-icons/md"
 import { useState } from 'react'
+import { dblClick } from '@testing-library/user-event/dist/click'
 
 
 interface Props{
@@ -34,7 +35,16 @@ interface Props{
   
     return (
     <form className="todos__single">
-        <span className="todos__single--text" style={{textDecoration: todo.isDone? "line-through": "none"}} >{todo.todo}</span>
+        {
+            edit ? (
+                <input 
+                type="text" 
+                
+                />
+            ) : (
+            <span className="todos__single--text" style={{textDecoration: todo.isDone? "line-through": "none"}} >{todo.todo}</span>
+            )
+        }
 
         <div>
             <span className='icon' onClick={() =>{
