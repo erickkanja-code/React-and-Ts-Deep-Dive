@@ -12,13 +12,19 @@ interface Props{
 
 
 const SingleTodo = ({todo, todos, setTodos}: Props) => {
-    const handleDone = (id: number) => {
+    const handleDelete = (id: number) => {
         const newTodos: Todo[] = todos.filter((todo) => (
             todo.id !== id
         ))
         setTodos(newTodos)
     }
   
+    const handleDone = (id: number) => {
+        const newTodos: Todo[] = todos.map((todo) => (
+            todo.id === id ? {...todo, isDone: !todo.isDone} : todo
+        ))
+        setTodos(newTodos)
+    }
   
     return (
     <form className="todos__single">
@@ -28,10 +34,10 @@ const SingleTodo = ({todo, todos, setTodos}: Props) => {
             <span className='icon'>
                 <AiFillEdit />
             </span>
-            <span className='icon' onClick={()=>handleDone(todo.id)}>
+            <span className='icon' onClick={()=> handleDone(todo.id)}>
                 <MdDone />
             </span>
-            <span className='icon' >
+            <span className='icon' onClick={()=>handleDelete(todo.id)}>
                 <AiFillDelete />
             </span>
         </div>
