@@ -2,6 +2,8 @@ import React from 'react'
 import { Todo } from '../model'
 import { AiFillEdit, AiFillDelete } from "react-icons/ai"
 import { MdDone } from "react-icons/md"
+import { useState } from 'react'
+
 
 interface Props{
     todo: Todo,
@@ -11,7 +13,11 @@ interface Props{
 
 
 
-const SingleTodo = ({todo, todos, setTodos}: Props) => {
+    const SingleTodo = ({todo, todos, setTodos}: Props) => {
+        
+    const [edit, setEdit] = useState<boolean>(false)
+    const [editTodo, setEditTodo] = useState<string>(todo.todo)
+    
     const handleDelete = (id: number) => {
         const newTodos: Todo[] = todos.filter((todo) => (
             todo.id !== id
@@ -28,10 +34,14 @@ const SingleTodo = ({todo, todos, setTodos}: Props) => {
   
     return (
     <form className="todos__single">
-        <span className="todos__single--text">{todo.todo}</span>
+        <span className="todos__single--text" style={{textDecoration: todo.isDone? "line-through": "none"}} >{todo.todo}</span>
 
         <div>
-            <span className='icon'>
+            <span className='icon' onClick={() =>{
+                if (!edit && !todo.isDone) {
+                    setEdit(!edit)
+                }
+            }}>
                 <AiFillEdit />
             </span>
             <span className='icon' onClick={()=> handleDone(todo.id)}>
