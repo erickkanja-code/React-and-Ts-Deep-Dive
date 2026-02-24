@@ -10,8 +10,17 @@ interface Props{
 }
 
 
+
 const SingleTodo = ({todo, todos, setTodos}: Props) => {
-  return (
+    const handleDone = (id: number) => {
+        const newTodos: Todo[] = todos.filter((todo) => (
+            todo.id !== id
+        ))
+        setTodos(newTodos)
+    }
+  
+  
+    return (
     <form className="todos__single">
         <span className="todos__single--text">{todo.todo}</span>
 
@@ -19,10 +28,10 @@ const SingleTodo = ({todo, todos, setTodos}: Props) => {
             <span className='icon'>
                 <AiFillEdit />
             </span>
-            <span className='icon'>
+            <span className='icon' onClick={()=>handleDone(todo.id)}>
                 <MdDone />
             </span>
-            <span className='icon'>
+            <span className='icon' >
                 <AiFillDelete />
             </span>
         </div>
